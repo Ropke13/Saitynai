@@ -1,26 +1,23 @@
-const Tour = require('./../models/tourModel');
+const Booking = require('./../models/bookingModel');
 
 //const tours = JSON.parse(
 //    fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 //);
 
-exports.getAllTours = async (req, res) =>{
+exports.getAllBookings = async (req, res) =>{
     try{
-        //const queryObj = {...req.query};
-        //const excludeFields = ['page', 'sort', 'limit', 'fields'];
-        //excludeFields.forEach(el => delete queryObj[el]);  
-        let filter = {}
-        if(req.params.bookingId) filter = { booking: req.params.bookingId };
+        const queryObj = {...req.query};
+        const excludeFields = ['page', 'sort', 'limit', 'fields'];
+        excludeFields.forEach(el => delete queryObj[el]);  
 
+        const query = Booking.find(req.query);
 
-        const query = Tour.find(filter);
-
-        const tours = await query
+        const bookings = await query
         res.status(200).json({
             status: 'success',
-            results: tours.length,
+            results: bookings.length,
             data: {
-                tours
+                bookings
             }
         });
     } catch(err){
@@ -31,14 +28,14 @@ exports.getAllTours = async (req, res) =>{
     }
 };
 
-exports.getTour = async (req, res) => {
+exports.getBooking = async (req, res) => {
     try{
-        const tour = await Tour.findById(req.params.id)
+        const booking = await Booking.findById(req.params.id)
 
         res.status(200).json({
             status: 'success',
             data: {
-                tour
+                booking
             }
         });
     } catch(err){
@@ -49,15 +46,14 @@ exports.getTour = async (req, res) => {
     }
 }
 
-exports.createTour = async (req, res) =>{
+exports.createBooking = async (req, res) =>{
     try{
-        if(!req.body.booking) req.body.booking = req.params.bookingId;
-        const newTour = await Tour.create(req.body);
+        const newBooking = await Booking.create(req.body);
 
         res.status(201).json({
             status: 'success',
             data: {
-                tour: newTour
+                booking: newBooking
             }
         });
     } catch (err){
@@ -68,9 +64,9 @@ exports.createTour = async (req, res) =>{
     }  
 }
 
-exports.updateTour = async (req, res) => {
+exports.updateBooking = async (req, res) => {
     try{
-        const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+        const booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         });
@@ -78,7 +74,7 @@ exports.updateTour = async (req, res) => {
         res.status(200).json({
             status: 'success',
             data: {
-                tour
+                booking
             }
         });
     } catch(err){
@@ -89,9 +85,9 @@ exports.updateTour = async (req, res) => {
     }
 }
 
-exports.deleteTour = async (req, res) => {
+exports.deleteBooking = async (req, res) => {
     try{
-        await Tour.findByIdAndDelete(req.params.id);
+        await Booking.findByIdAndDelete(req.params.id);
 
         res.status(204).json({
             status: 'success',

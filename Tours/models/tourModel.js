@@ -53,6 +53,10 @@ const tourSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    booking: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Booking'
+    },
     startDates: [Date],
     startLocation: {
         // GeoJSON
