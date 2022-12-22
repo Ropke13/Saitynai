@@ -1,7 +1,7 @@
 const Review = require('./../models/reviewModel');
 
 exports.getAllReviews = async (req, res) => {
-    try{
+    try {
         //const queryObj = {...req.query};
         //const excludeFields = ['page', 'sort', 'limit', 'fields'];
         //excludeFields.forEach(el => delete queryObj[el]);

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9094b027-8ea8-4af1-8ecd-e4c93c8c196f/AppServices/subscriptions/9094b027-8ea8-4af1-8ecd-e4c93c8c196f/resourceGroups/test/providers/Microsoft.Web/sites/saitynai",
+    "appService.deploySubpath": "."
+}
